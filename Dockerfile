@@ -109,4 +109,6 @@ ENV NOTIFICATIONS_JWT_KID test
 #  JWK url field to use for JWTs.
 ENV NOTIFICATIONS_JWT_JKU localhost
 
-CMD ["npm", "start"]
+# CMD ["npm", "start"]
+RUN ["node", "./bin/db_patcher.js"]
+CMD ["node", "./bin/server.js"]
