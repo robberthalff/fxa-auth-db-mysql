@@ -6,6 +6,7 @@ COPY bin /app/bin
 COPY config /app/config
 COPY fxa-auth-db-server /app/fxa-auth-db-server
 COPY lib /app/lib
+COPY test /app/test
 ADD AUTHORS /app/AUTHORS
 ADD CONTRIBUTING.md /app/CONTRIBUTING.md
 ADD LICENSE /app/LICENSE
