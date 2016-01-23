@@ -1,6 +1,7 @@
-FROM mhart/alpine-node
+FROM node:5.5-slim
 
-RUN adduser -S fxa
+#FROM mhart/alpine-node
+#RUN adduser -S fxa
 
 COPY bin /app/bin
 COPY config /app/config
@@ -17,6 +18,8 @@ ADD package.json /app/package.json
 WORKDIR /app
 
 EXPOSE 8000
+
+RUN ["cat", "/etc/hosts"]
 
 RUN ["npm", "install", "--production"]
 
