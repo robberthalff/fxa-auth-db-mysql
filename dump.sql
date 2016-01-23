@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.27, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.46, for debian-linux-gnu (x86_64)
 --
--- Host: localhost    Database: fxa
+-- Host: 10.7.0.9    Database: fxa
 -- ------------------------------------------------------
--- Server version	5.6.27-0ubuntu1
+-- Server version	5.5.44-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,7 +30,7 @@ CREATE TABLE `accountResetTokens` (
   PRIMARY KEY (`tokenId`),
   UNIQUE KEY `uid` (`uid`),
   KEY `createdAt` (`createdAt`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -53,7 +53,7 @@ CREATE TABLE `accountUnlockCodes` (
   `uid` binary(16) NOT NULL,
   `unlockCode` binary(16) NOT NULL,
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,8 +74,8 @@ DROP TABLE IF EXISTS `accounts`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `accounts` (
   `uid` binary(16) NOT NULL,
-  `normalizedEmail` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `normalizedEmail` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `emailCode` binary(16) NOT NULL,
   `emailVerified` tinyint(1) NOT NULL DEFAULT '0',
   `kA` binary(32) NOT NULL,
@@ -85,11 +85,11 @@ CREATE TABLE `accounts` (
   `verifierVersion` tinyint(3) unsigned NOT NULL,
   `verifierSetAt` bigint(20) unsigned NOT NULL,
   `createdAt` bigint(20) unsigned NOT NULL,
-  `locale` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `locale` varchar(255) DEFAULT NULL,
   `lockedAt` bigint(20) unsigned DEFAULT NULL,
   PRIMARY KEY (`uid`),
   UNIQUE KEY `normalizedEmail` (`normalizedEmail`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,10 +109,10 @@ DROP TABLE IF EXISTS `dbMetadata`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `dbMetadata` (
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `value` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `value` varchar(255) NOT NULL,
   PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,14 +136,14 @@ CREATE TABLE `devices` (
   `uid` binary(16) NOT NULL,
   `id` binary(16) NOT NULL,
   `sessionTokenId` binary(32) DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `type` varchar(16) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `type` varchar(16) DEFAULT NULL,
   `createdAt` bigint(20) unsigned DEFAULT NULL,
-  `callbackURL` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `callbackURL` varchar(255) DEFAULT NULL,
   `callbackPublicKey` binary(32) DEFAULT NULL,
   PRIMARY KEY (`uid`,`id`),
   UNIQUE KEY `UQ_devices_sessionTokenId` (`uid`,`sessionTokenId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,10 +165,10 @@ DROP TABLE IF EXISTS `eventLog`;
 CREATE TABLE `eventLog` (
   `pos` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `uid` binary(16) NOT NULL,
-  `typ` enum('create','verify','reset','delete') COLLATE utf8_unicode_ci NOT NULL,
+  `typ` enum('create','verify','reset','delete') NOT NULL,
   `iat` int(10) unsigned NOT NULL,
   PRIMARY KEY (`pos`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -190,7 +190,7 @@ DROP TABLE IF EXISTS `eventLogPublishState`;
 CREATE TABLE `eventLogPublishState` (
   `lastPublishedPos` bigint(20) unsigned NOT NULL,
   `lastPublishedAt` int(10) unsigned NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -218,7 +218,7 @@ CREATE TABLE `keyFetchTokens` (
   `createdAt` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`tokenId`),
   KEY `key_uid` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -239,11 +239,11 @@ DROP TABLE IF EXISTS `openids`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `openids` (
   `hash` binary(32) NOT NULL,
-  `id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `id` varchar(255) NOT NULL,
   `uid` binary(16) NOT NULL,
   PRIMARY KEY (`hash`),
   KEY `openid_uid` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -271,7 +271,7 @@ CREATE TABLE `passwordChangeTokens` (
   UNIQUE KEY `uid` (`uid`),
   KEY `session_uid` (`uid`),
   KEY `createdAt` (`createdAt`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -300,7 +300,7 @@ CREATE TABLE `passwordForgotTokens` (
   PRIMARY KEY (`tokenId`),
   UNIQUE KEY `uid` (`uid`),
   KEY `createdAt` (`createdAt`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -324,15 +324,15 @@ CREATE TABLE `sessionTokens` (
   `tokenData` binary(32) NOT NULL,
   `uid` binary(16) NOT NULL,
   `createdAt` bigint(20) unsigned NOT NULL,
-  `uaBrowser` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `uaBrowserVersion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `uaOS` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `uaOSVersion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `uaDeviceType` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `uaBrowser` varchar(255) DEFAULT NULL,
+  `uaBrowserVersion` varchar(255) DEFAULT NULL,
+  `uaOS` varchar(255) DEFAULT NULL,
+  `uaOSVersion` varchar(255) DEFAULT NULL,
+  `uaDeviceType` varchar(255) DEFAULT NULL,
   `lastAccessTime` bigint(20) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`tokenId`),
   KEY `session_uid` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -597,7 +597,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ackPublishedEvents_1`(
 )
 BEGIN
 
-    -- Update lastPublishedPos, but don't move it backwards.
+    
     UPDATE eventLogPublishState
     SET lastPublishedPos = ackPos, lastPublishedAt = UNIX_TIMESTAMP()
     WHERE lastPublishedPos < ackPos;
@@ -649,8 +649,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `createAccountResetToken_2`(
     IN createdAt BIGINT UNSIGNED
 )
 BEGIN
-    -- Since we only ever want one accountResetToken per uid, then we
-    -- do a replace - generally due to a collision on the unique uid field.
+    
+    
     REPLACE INTO accountResetTokens(
         tokenId,
         tokenData,
@@ -978,8 +978,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `createPasswordChangeToken_2`(
     IN createdAt BIGINT UNSIGNED
 )
 BEGIN
-    -- Since we only ever want one passwordChangeToken per uid, then we
-    -- do a replace - generally due to a collision on the unique uid field.
+    
+    
     REPLACE INTO passwordChangeTokens(
         tokenId,
         tokenData,
@@ -1017,8 +1017,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `createPasswordForgotToken_2`(
     IN tries SMALLINT
 )
 BEGIN
-    -- Since we only ever want one passwordForgotToken per uid, then we
-    -- do a replace - generally due to a collision on the unique uid field.
+    
+    
     REPLACE INTO passwordForgotTokens(
         tokenId,
         tokenData,
@@ -1533,15 +1533,15 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `forgotPasswordVerified_4`(
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
-        -- ERROR
+        
         ROLLBACK;
         RESIGNAL;
     END;
 
     START TRANSACTION;
 
-    -- Since we only ever want one accountResetToken per uid, then we
-    -- do a replace - generally due to a collision on the unique uid field.
+    
+    
     REPLACE INTO accountResetTokens(
         tokenId,
         tokenData,
@@ -1656,15 +1656,15 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `lockAccount_2`(
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
-        -- ERROR
+        
         ROLLBACK;
         RESIGNAL;
     END;
 
     START TRANSACTION;
 
-    -- Any old values for the account should be removed
-    -- before new values are inserted.
+    
+    
     REPLACE INTO accountUnlockCodes (
       uid,
       unlockCode
@@ -1839,7 +1839,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `prune`(IN pruneBefore BIGINT UNSIGNED, IN now BIGINT UNSIGNED)
 BEGIN
-    -- try and obtain the prune lock
+    
     SELECT @lockAcquired:=GET_LOCK('fxa-auth-server.prune-lock', 3);
 
     IF @lockAcquired THEN
@@ -1852,12 +1852,12 @@ BEGIN
             DELETE FROM passwordForgotTokens WHERE createdAt < pruneBefore;
             DELETE FROM passwordChangeTokens WHERE createdAt < pruneBefore;
 
-            -- save the time this last ran at (ie. now)
+            
             UPDATE dbMetadata SET value = CONVERT(now, CHAR) WHERE `name` = 'prune-last-ran';
 
         END IF;
 
-        -- release the lock
+        
         SELECT RELEASE_LOCK('fxa-auth-server.prune-lock');
 
     END IF;
@@ -2105,7 +2105,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `unlockAccount_2`(
 BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
-        -- ERROR
+        
         ROLLBACK;
         RESIGNAL;
     END;
@@ -2362,4 +2362,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-01-23 20:29:32
+-- Dump completed on 2016-01-23 20:53:54
