@@ -110,5 +110,5 @@ ENV NOTIFICATIONS_JWT_KID test
 ENV NOTIFICATIONS_JWT_JKU localhost
 
 # CMD ["npm", "start"]
-RUN ["node", "./bin/db_patcher.js"]
+#RUN ["node", "./bin/db_patcher.js"]
 CMD ["node", "./bin/server.js"]
