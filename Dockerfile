@@ -2,16 +2,16 @@ FROM mhart/alpine-node
 
 RUN adduser -S fxa
 
-COPY bin /app/
-COPY config /app/
-COPY fxa-auth-db-server /app/
-COPY lib /app/
-ADD AUTHORS /app/
-ADD CONTRIBUTING.md /app/
-ADD LICENSE /app/
-ADD README.md /app/
-ADD index.js /app/
-ADD package.json /app/
+COPY bin /app/bin
+COPY config /app/config
+COPY fxa-auth-db-server /app/fxa-auth-db-server
+COPY lib /app/lib
+ADD AUTHORS /app/AUTHORS
+ADD CONTRIBUTING.md /app/CONTRIBUTING.md
+ADD LICENSE /app/LICENSE
+ADD README.md /app/README.md
+ADD index.js /app/index.js
+ADD package.json /app/package.json
 
 WORKDIR /app
 
