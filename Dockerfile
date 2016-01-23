@@ -105,4 +105,4 @@ ENV NOTIFICATIONS_JWT_KID test
 #  JWK url field to use for JWTs.
 ENV NOTIFICATIONS_JWT_JKU localhost
 
-CMD ["npm", "start", "--production"]
+CMD ["npm", "start"]
