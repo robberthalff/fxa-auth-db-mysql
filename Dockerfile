@@ -88,7 +88,7 @@ ENV MYSQL_SLAVE_WAIT_FOR_CONNECTIONS true
 ENV MYSQL_SLAVE_QUEUE_LIMIT 100
 
 #  Url at which to publish account lifecycle events (empty to disable publishing).
-ENV NOTIFICATIONS_PUBLISH_URL=
+#ENV NOTIFICATIONS_PUBLISH_URL=
 
 #  Interval to sleep between polling for unpublished events in seconds
 ENV NOTIFICATIONS_POLL_INTERVAL 10
